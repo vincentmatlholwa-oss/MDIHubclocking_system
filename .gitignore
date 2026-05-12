@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-employee/
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.log
+.DS_Store
+Thumbs.db
+.env.local
+.env.*.local

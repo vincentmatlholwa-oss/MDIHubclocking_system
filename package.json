@@ -1,0 +1,32 @@
+{
+  "name": "mdihub-v3",
+  "private": true,
+  "version": "3.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:employee": "vite --mode employee",
+    "build": "vite build",
+    "build:employee": "vite build --mode employee",
+    "preview": "vite preview",
+    "server": "node backend/server.js"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.3",
+    "@capacitor/cli": "^7.6.4",
+    "@capacitor/core": "^8.3.3",
+    "date-fns": "^3.6.0",
+    "idb": "^8.0.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.20.0"
+  }
+}
