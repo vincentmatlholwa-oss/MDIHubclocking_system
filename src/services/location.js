@@ -1,7 +1,7 @@
 import { GEOFENCE } from '../utils/constants';
 import { isWithinGeofence } from '../utils/helpers';
 
-export async function getCurrentPosition(timeout = 10000) {
+function getPosition(options) {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject(new Error('Geolocation not supported'));
@@ -15,22 +15,43 @@ export async function getCurrentPosition(timeout = 10000) {
         timestamp: pos.timestamp
       }),
       (err) => reject(err),
-      { enableHighAccuracy: true, timeout, maximumAge: 30000 }
+      options
     );
   });
+}
+
+export async function getCurrentPosition(timeout = 15000) {
+  try {
+    return await getPosition({ enableHighAccuracy: true, timeout, maximumAge: 10000 });
+  } catch {
+    return getPosition({ enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 });
+  }
 }
 
 export async function checkGeofence(lat, lng) {
   return isWithinGeofence(lat, lng, GEOFENCE.center, GEOFENCE.radiusMeters);
 }
 
+export function distanceFromCenter(lat, lng) {
+  if (!lat || !lng) return null;
+  const R = 6371000;
+  const dLat = (lat - GEOFENCE.center.lat) * Math.PI / 180;
+  const dLng = (lng - GEOFENCE.center.lng) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(GEOFENCE.center.lat * Math.PI / 180) * Math.cos(lat * Math.PI / 180) *
+    Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 export async function validateLocation() {
   try {
     const pos = await getCurrentPosition();
     const within = await checkGeofence(pos.lat, pos.lng);
+    const dist = distanceFromCenter(pos.lat, pos.lng);
     return {
       ...pos,
       withinGeofence: within,
+      distanceFromCenter: Math.round(dist),
       geofenceCenter: GEOFENCE.center,
       geofenceRadius: GEOFENCE.radiusMeters,
       geofenceLabel: GEOFENCE.label
@@ -41,6 +62,7 @@ export async function validateLocation() {
       lng: null,
       accuracy: null,
       withinGeofence: false,
+      distanceFromCenter: null,
       error: error.message,
       geofenceCenter: GEOFENCE.center,
       geofenceRadius: GEOFENCE.radiusMeters

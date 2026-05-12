@@ -5,8 +5,8 @@ export const COMPANY = {
 };
 
 export const GEOFENCE = {
-  center: { lat: -25.8617, lng: 25.6444 },
-  radiusMeters: 100,
+  center: { lat: -25.838889, lng: 25.631907 },
+  radiusMeters: 1000,
   label: 'MDIHub'
 };
 
@@ -39,7 +39,12 @@ export const ATTENDANCE_STATUS = {
 export const LEAVE_TYPES = {
   sick: { label: 'Sick Leave', icon: '🤒', maxDays: 30 },
   annual: { label: 'Annual Leave', icon: '🏖️', maxDays: 15 },
-  personal: { label: 'Personal Leave', icon: '📋', maxDays: 5 }
+  personal: { label: 'Personal Leave', icon: '📋', maxDays: 5 },
+  study: { label: 'Study Leave', icon: '📚', maxDays: 30 },
+  family: { label: 'Family Responsibility', icon: '👨‍👩‍👧‍👦', maxDays: 5 },
+  maternity: { label: 'Maternity Leave', icon: '👶', maxDays: 120 },
+  paternity: { label: 'Paternity Leave', icon: '🍼', maxDays: 10 },
+  unpaid: { label: 'Unpaid Leave', icon: '💰', maxDays: 30 }
 };
 
 export const LEAVE_STATUS = {
