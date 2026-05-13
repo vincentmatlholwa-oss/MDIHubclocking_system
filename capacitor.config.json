@@ -1,6 +1,6 @@
 {
   "appId": "com.mdihub.employee",
-  "appName": "MDIHub Employee",
+  "appName": "MDIHub Offline Clocking System",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "server": {

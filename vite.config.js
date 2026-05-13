@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
   const isEmployee = mode === 'employee';
-  const base = isEmployee ? '/employee/' : '/';
+  const base = '/';
 
   return {
     base,
